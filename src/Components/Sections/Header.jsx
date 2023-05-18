@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Bars3Icon } from '@heroicons/react/24/solid';
-import setTitle from '../Utility/Common';
 
 const Header = () => {
     const [navVisible, setNavVisible] = useState(false);
@@ -11,29 +10,29 @@ const Header = () => {
     const [profileHover, setProfileHover] = useState(false);
 
     return (
-        <div className='h-20 px-4 py-2 border-b shadow-mg bg-white sticky top-0'>
+        <div className='h-20 px-4 py-2 border-b shadow-mg bg-white sticky top-0 z-50'>
             <div className='max-w-[1170px] w-full h-full mx-auto flex items-center justify-between relative'>
                 <Link to="/" className='md:translate-y-4'>
                     <img src='./logo.png' className='w-32 md:w-52' />
                 </Link>
                 <ul className={`${navVisible?"translate-x-0":"translate-x-[120%]"} transition md:translate-x-0 md:flex gap-4 absolute md:static right-0 top-16 border md:border-0 rounded bg-white px-6 py-3`}>
                     <li className='py-2'>
-                        <Link onClick={()=>{setNavVisible(false),setTitle("Blitz Toyz")}} to="/" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>Blitz Toyz</Link>
+                        <Link onClick={()=>setNavVisible(false)} to="/" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>Blitz Toyz</Link>
                     </li>
                     <li className='py-2'>
-                        <Link onClick={()=>{setNavVisible(false),setTitle("Blitz Toyz")}} to="/" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>Home</Link>
+                        <Link onClick={()=>setNavVisible(false)} to="/" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>Home</Link>
                     </li>
                     <li className='py-2'>
-                        <Link onClick={()=>{setNavVisible(false),setTitle("Blitz | All Toyz")}} to="/alltoyz" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>All Toys</Link>
+                        <Link onClick={()=>setNavVisible(false)} to="/alltoyz" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>All Toys</Link>
                     </li>
                     <li className='py-2'>
-                        <Link onClick={()=>{setNavVisible(false),setTitle("Blitz | My Toyz")}} to="/mytoyz" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>My Toyz</Link>
+                        <Link onClick={()=>setNavVisible(false)} to="/mytoyz" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>My Toyz</Link>
                     </li>
                     <li className='py-2'>
-                        <Link onClick={()=>{setNavVisible(false),setTitle("Blitz | Add Toy")}} to="/addtoy" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>Add a Toy</Link>
+                        <Link onClick={()=>setNavVisible(false)} to="/addtoy" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>Add a Toy</Link>
                     </li>
                     <li className='py-2'>
-                        <Link onClick={()=>{setNavVisible(false),setTitle("Blitz | Blogz")}} to="/blogz" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>Blogz</Link>
+                        <Link onClick={()=>setNavVisible(false)} to="/blogz" className='px-4 py-2 rounded md:bg-primary md:bg-opacity-20 md:hover:bg-h-primary md:hover:bg-opacity-50 transition text-slate-800 hover:text-slate-400 md:hover:text-slate-800'>Blogz</Link>
                     </li>
                 </ul>
                 <div className='relative ml-auto md:ml-0'>

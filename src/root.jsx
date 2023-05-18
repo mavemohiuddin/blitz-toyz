@@ -7,6 +7,11 @@ import {
 } from "react-router-dom";
 import Template from './Components/Template';
 import Error404 from './Components/Pages/Error404';
+import Home from './Components/Pages/Home';
+import AllToys from './Components/Pages/AllToys';
+import MyToys from './Components/Pages/MyToys';
+import AddToy from './Components/Pages/AddToy';
+import Blog from './Components/Pages/Blog';
 
 const router = createBrowserRouter([
     {
@@ -15,7 +20,23 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <div>Hello world!</div>
+                element: <Home></Home>
+            },
+            {
+                path: "/alltoyz",
+                element: <AllToys></AllToys>
+            },
+            {
+                path: "/mytoyz",
+                element: <MyToys></MyToys>
+            },
+            {
+                path: "/addtoy",
+                element: <AddToy></AddToy>
+            },
+            {
+                path: "/blogz",
+                element: <Blog></Blog>
             }
         ]
     },
