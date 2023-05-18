@@ -23,9 +23,10 @@ const Home = () => {
             </Section>
             <Section
             preHeading="Expert Choices"
-            heading="Explore the best collection">
+            heading="Explore the best collection"
+            >
                 <div className='grid grid-cols-3 gap-8'>
-                    
+
                 </div>
             </Section>
         </div>

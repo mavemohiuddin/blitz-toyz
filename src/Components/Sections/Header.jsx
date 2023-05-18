@@ -36,7 +36,9 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className='relative ml-auto md:ml-0'>
-                    <button onMouseEnter={()=>setProfileHover(true)} onMouseLeave={()=>setProfileHover(false)} onClick={()=>{setNavVisible(false),setProfileVisible(!profileVisible)}} className='px-4 py-2 mr-4 rounded transition bg-primary hover:bg-h-primary text-white'>Log in</button>
+                    <button onMouseEnter={()=>setProfileHover(true)} onMouseLeave={()=>setProfileHover(false)} onClick={()=>{setNavVisible(false),setProfileVisible(!profileVisible)}} className='px-4 py-2 mr-4 rounded transition bg-primary hover:bg-h-primary text-white'>
+                        <Link to="/login">Log in</Link>
+                    </button>
                     <div className={`${profileHover?"block":profileVisible?"block":"hidden"} absolute -right-6 md:right-auto md:left-1/2 top-full md:-translate-x-1/2 bg-white z-10 px-12 py-6 border rounded flex flex-col gap-4 items-center justify-center`}>
                             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJiCoNl3EO01AxqXlHfMgS22unf7K0484Szw&usqp=CAU' className='w-24 h-24 rounded-full border-8 overflow-hidden' />
                             <p className='font-play text-lg font-bold text-slate-600 whitespace-nowrap'>User Name</p>
