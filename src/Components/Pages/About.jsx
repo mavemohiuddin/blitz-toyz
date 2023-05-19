@@ -2,8 +2,10 @@
 import React from 'react';
 import Banner from '../Elements/Banner';
 import Section from '../Elements/Section';
+import setTitle from '../Utility/Common';
 
 const About = () => {
+    setTitle("BLitz | About")
     return (
         <Section heading="About Us" preHeading="Blitz Toyz">
             <div className='max-w-4xl mx-auto w-full'>

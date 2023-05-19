@@ -8,7 +8,7 @@ const Home = () => {
     setTitle("Blitz Toyz");
     return (
         <div>
-            <Section>
+            <Section extraClass="pb-4">
                 <Banner
                 preHeading="Work Hard Play Hard"
                 heading="Best Action Figure Collectable"
@@ -21,6 +21,25 @@ const Home = () => {
                     </div>
                 </Banner>
             </Section>
+
+            <Section extraClass="py-0">
+                <div className='grid grid-cols-3 relative'>
+                    <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-3/4 border-l border-r border-gray-400'></div>
+                    <div>
+                        <img src="https://media-www.canadiantire.ca/product/seasonal-gardening/toys/toys-games/0508371/transformers-cybertron-roll-and-transform-assorted-6b39e387-9bd2-4ee0-b035-01773f7173f5.png" alt="" className='h-32 w-full object-contain object-center' />
+                        <p className='text-center font-heading'>Transformers</p>
+                    </div>
+                    <div>
+                        <img src="https://i.pinimg.com/236x/a5/48/b0/a548b0f0c022901bf902b16ba3f08dbe.jpg" alt="" className='h-32 w-full object-contain object-center' />
+                        <p className='text-center font-heading'>Iron Man</p>
+                    </div>
+                    <div>
+                        <img src="https://i5.walmartimages.com/asr/8913647a-f4b3-4bcb-bb12-b3f6a4049159.4b61bc93c2696ba0e45aa623bf3f39c7.jpeg?odnHeight=784&odnWidth=580&odnBg=FFFFFF" alt="" className='h-32 w-full object-contain object-center' />
+                        <p className='text-center font-heading'>HULK</p>
+                    </div>
+                </div>
+            </Section>
+
             <Section
             preHeading="Expert Choices"
             heading="Explore the best collection"
