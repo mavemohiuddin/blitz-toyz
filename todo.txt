@@ -1,1 +1,3 @@
 1. Fix sign up with google
+2. Update User info after sign up
+3. Return to page after login

@@ -1,3 +1,4 @@
+import { updateCurrentUser } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
