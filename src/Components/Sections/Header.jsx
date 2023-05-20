@@ -20,7 +20,6 @@ const Header = () => {
         .catch()
     }
 
-    console.log(user);
 
     return (
         <div className='h-20 px-4 py-2 border-b shadow-mg bg-white sticky top-0 z-50'>
@@ -63,7 +62,7 @@ const Header = () => {
                     {user && <div className={`${profileHover?"block":profileVisible?"block":"hidden"} absolute -right-6 md:right-auto md:left-1/2 top-full md:-translate-x-1/2 bg-white z-10 px-12 py-6 border rounded flex flex-col gap-4 items-center justify-center`}>
                         <img src={user.photoURL?user.photoURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJiCoNl3EO01AxqXlHfMgS22unf7K0484Szw&usqp=CAU"} className='w-24 h-24 rounded-full border-8 overflow-hidden' />
                         <p className='font-play text-lg font-bold text-slate-600 whitespace-nowrap'>{user.displayName?user.displayName:user.email}</p>
-                        <button onClick={()=>{setNavVisible(false),setProfileVisible(false),logout()}} className='px-4 py-2 rounded bg-primary hover:bg-h-primary text-white transition whitespace-nowrap'>Log out</button>
+                        <button onClick={()=>{setNavVisible(false),setProfileVisible(false),logout(),setProfileHover(false)}} className='px-4 py-2 rounded bg-primary hover:bg-h-primary text-white transition whitespace-nowrap'>Log out</button>
                     </div>}
                 </div>
                 <button className='w-6 md:hidden' onClick={()=>{setNavVisible(!navVisible), setProfileVisible(false)}}>

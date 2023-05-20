@@ -1,11 +1,15 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Section from '../Elements/Section';
 import { AuthContext } from '../Utility/AuthProvider';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+    
     const [message, setMessage] = useState("");
     const [messageColor, setMessageColor] = useState("");
 
@@ -37,6 +41,7 @@ const Login = () => {
         .then(result=>{
             setMessage("Log in successful");
             setMessageColor("text-green-400");
+            navigate(from, {replace:true})
         })
         .catch(error=>{
             const errorMessage = error.code.split("/")[1].replaceAll("-", " ");

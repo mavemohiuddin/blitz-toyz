@@ -1,16 +1,17 @@
 import { updateCurrentUser } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Section from '../Elements/Section';
 import { AuthContext } from '../Utility/AuthProvider';
 
 const Signup = () => {
+    const navigate = useNavigate();
 
     const [message, setMessage] = useState("");
     const [messageColor, setMessageColor] = useState("");
 
-    const { auth, createUser } = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
 
     const googleSignup = (event) => {
         setMessage("");
@@ -33,6 +34,8 @@ const Signup = () => {
             .then(result => {
                 setMessage("Sign Up Successful!");
                 setMessageColor("text-green-400");
+                updateUser(name, image);
+                navigate("/", {replace:true})
             })
             .catch(error=>{
                 const errorMessage = error.code.split("/")[1].replaceAll("-", " ");

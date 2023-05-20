@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Banner from '../Elements/Banner';
+import CardSmall from '../Elements/CardSmall';
 import Section from '../Elements/Section';
 import setTitle from '../Utility/Common';
 
 const Home = () => {
+    const [allProduct, setAllProduct] = useState([]);
+
+    useEffect(()=>{
+        fetch("https://blitz-toyz-server-mavemohiuddin.vercel.app/toys")
+        .then(res=>res.json())
+        .then(data=>setAllProduct(data))
+    }, [])
+
     setTitle("Blitz Toyz");
     return (
         <div>
@@ -22,7 +32,7 @@ const Home = () => {
                 </Banner>
             </Section>
 
-            <Section extraClass="py-0">
+            <Section extraClass="pt-0 pb-0">
                 <div className='grid grid-cols-3 relative'>
                     <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-3/4 border-l border-r border-gray-400'></div>
                     <div>
@@ -41,11 +51,15 @@ const Home = () => {
             </Section>
 
             <Section
-            preHeading="Expert Choices"
-            heading="Explore the best collection"
+            preHeading="Gallery"
+            heading="Explore Our collection"
             >
                 <div className='grid grid-cols-3 gap-8'>
-
+                    {
+                        allProduct.map(product=>{
+                            return <CardSmall key={product._id} product={product}></CardSmall>
+                        })
+                    }
                 </div>
             </Section>
         </div>

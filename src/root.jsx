@@ -18,6 +18,7 @@ import AuthProvider from './Components/Utility/AuthProvider';
 import PrivateRoute from './Components/Utility/PrivateRoute';
 import About from './Components/Pages/About';
 import Contact from './Components/Pages/Contact';
+import SingleProduct from './Components/Pages/SingleProduct';
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact></Contact>
+            },
+            {
+                path: "/toy/:id",
+                element: <SingleProduct></SingleProduct>
             }
         ]
     },
