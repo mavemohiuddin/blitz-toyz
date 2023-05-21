@@ -42,7 +42,6 @@ const UpdateToy = () => {
                     showConfirmButton: false,
                     timer: 3500
                 })
-                // setTimeout(()=>navigate(""), 3500)
                 navigate("/mytoyz", {replace:true})
             }
         })

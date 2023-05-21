@@ -6,21 +6,30 @@ import { AuthContext } from '../Utility/AuthProvider';
 import setTitle from '../Utility/Common';
 
 const AllToys = () => {
-    // const allProduct = useLoaderData();
     const { user } = useContext(AuthContext);
 
     const [allProduct, setAllProduct] = useState([]);
+    const [filteredProduct, setFilteredProduct] = useState([]);
     useEffect(()=>{
         fetch("https://blitz-toyz-server-mavemohiuddin.vercel.app/all-toys")
         .then(res=>res.json())
-        .then(data=>setAllProduct(data))
+        .then(data=>{
+            setAllProduct(data);
+            setFilteredProduct(data)
+        })
     }, [])
 
-    const filteredProduct = allProduct.filter(product=>!product.id);
+    const searchItems = e => {
+        setFilteredProduct(allProduct.filter(product=>product.name.toLowerCase().includes(e.target.value.toLowerCase())))
+    }
     
     setTitle("Blitz | All Toys")
     return (
-        <Section>
+        <Section preHeading="Blitz Toyz" heading="All Toyz">
+            <div className='flex items-center justify-center max-w-sm mx-auto w-full mb-6 relative'>
+                <input onChange={searchItems} type="text" className='border border-gray-400 rounded-full px-4 py-1 w-full' />
+                <img onClick={searchItems} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDyua3DSjkeb8LoFdL-jB6KsoKP8eq-iLdmmtOvc85&s" alt="" className='w-5 h-5 absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer' />
+            </div>
             <div className='grid grid-cols-12 border-t border-l'>
                 <div className='p-4 border-b border-r col-span-3 text-center font-semibold py-2'>
                     <p>Product</p>
