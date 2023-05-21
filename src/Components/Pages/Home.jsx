@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+/* eslint-disable react/no-unescaped-entities */
+import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Banner from '../Elements/Banner';
 import CardSmall from '../Elements/CardSmall';
 import Section from '../Elements/Section';
+import { AuthContext } from '../Utility/AuthProvider';
 import setTitle from '../Utility/Common';
 
 const Home = () => {
     const [allProduct, setAllProduct] = useState([]);
+    const [specialProduct, setSpecialProduct] = useState([]);
     const [tagList, setTagList] = useState([]);
     const [tabActive, setTabActive] = useState(0)
 
@@ -18,6 +22,7 @@ const Home = () => {
     }, [])
 
     useEffect(()=>{
+        setSpecialProduct(allProduct[3])
         let newArray = []
         allProduct.map(item=>{
             if (!newArray.includes(item.sub_category)) {
@@ -35,6 +40,29 @@ const Home = () => {
         allContents.length > 0 ? allContents.forEach(item=>item.classList.add("hidden")) : null;
         allContents.length > 0 ? allContents[tabActive].classList.remove("hidden") : null;
     },[tabActive])
+    
+
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const openProduct = id => {
+        if (user) {
+            navigate(`/toy/${id}`, {replace:true})
+        } else {
+            Swal.fire({
+                title:`You're not logged in!`,
+                icon: 'info',
+                html:`You Must Log in to view details!`,
+                showCancelButton: true,
+                cancelButtonText: "Later",
+                confirmButtonText: "Log in"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  navigate("/login", {replace:true});
+                  scrollTo(0,0)
+                }
+            })
+        }
+    }
 
     setTitle("Blitz Toyz");
     return (
@@ -71,8 +99,38 @@ const Home = () => {
                 </div>
             </Section>
 
+            <Section preHeading="Editor's Choice" heading="Toy of the day">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    {specialProduct &&
+                        <>
+                            <div className='relative isolate flex items-end justify-center'>
+                                <div className='absolute bottom-0 left-1/2 -translate-x-1/2 -z-20 bg-h-primary bg-opacity-30 h-96 w-96 rounded-full'></div>
+                                <div className='absolute bottom-0 left-1/2 -translate-x-1/2 -z-10 bg-h-primary bg-opacity-30 h-80 w-80 rounded-full'></div>
+                                <div className='overflow-hidden rounded-b-full h-[450px] pt-20 w-96 grow_parent'>
+                                    <img src={specialProduct.image}  className="object-contain mb-12 transition duration-500" />
+                                </div>
+                            </div> 
+                            <div className='flex flex-col justify-center'>
+                                <p className='font-heading text-3xl tracking-wide'>{specialProduct.name}
+                                <span className='font-sans text-base ml-2 whitespace-nowrap'> (★ {specialProduct.rating})</span></p>
+                                <p className='mt-2'>Price: <span className='font-heading font-bold text-lg'>${specialProduct.price}</span></p>
+                                <p className='mt-1'>In Stock: <span className='font-heading font-bold text-lg'>{specialProduct.quantity}</span></p>
+                                <p className='my-4'>{specialProduct.description}</p>
+                                <p className='mt-2'>Category - 
+                                    <span className='px-2 py-px ml-2 rounded bg-h-secondary max-w-max'>{specialProduct.sub_category}</span>
+                                </p>
+                                <p className='mt-2'>Seller -
+                                    <span className='px-2 py-px ml-2 border border-gray-300 max-w-max'>{specialProduct.seller_name}</span>
+                                </p>
+                                <button onClick={()=>openProduct(specialProduct._id)} className="px-4 py-2 bg-primary hover:bg-h-primary transition text-white rounded block max-w-max mt-8">View Details</button>
+                            </div>
+                        </>
+                    }
+                </div>
+            </Section>
+
             <Section preHeading="Gallery" heading="Fan Favorite" extraClass="bg-orange-100 bg-opacity-50">
-                <div className='flex gap-12 overflow-auto pb-6'>
+                <div className='flex gap-12 overflow-auto pb-6 horizontal_scrollbar'>
                     {
                         allProduct.map(product=>{
                             if (product.id <= 12) {
@@ -85,7 +143,7 @@ const Home = () => {
 
             <Section
             preHeading="Blitz Toyz"
-            heading="Explore Our collection"
+            heading="Shop By Category"
             extraClass="bg-blue-100 bg-opacity-50"
             >
                 <div className='flex items-center justify-center gap-2 mt-8'>
@@ -108,6 +166,29 @@ const Home = () => {
                             </div>
                         })
                     }
+                </div>
+            </Section>
+
+            <Section preHeading="Reviews" heading="Customer Reviews" extraClass="bg-purple-100">
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-12 mt-12'>
+                    <div className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
+                        <img src="https://i.ibb.co/k53XKk7/star.png" className='h-40 w-40 -z-10 absolute -right-12 top-2 rotate-45 opacity-20 review_star01' />
+                        <img src="https://i.ibb.co/k53XKk7/star.png" className='h-20 w-20 -z-10 absolute -left-8 bottom-2 rotate-45 opacity-20 review_star02' />
+                        <p className="text-xl text-center font-heading">Excellent Quality and Design</p>
+                        <p className='mt-6'>I am extremely satisfied with this product. The quality is exceptional, and the design is impressive. It exceeded my expectations and provided great value for the price. Highly recommended!</p>
+                    </div>
+                    <div className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
+                        <img src="https://i.ibb.co/k53XKk7/star.png" className='h-40 w-40 -z-10 absolute -right-12 top-2 rotate-45 opacity-20 review_star01' />
+                        <img src="https://i.ibb.co/k53XKk7/star.png" className='h-20 w-20 -z-10 absolute -left-8 bottom-2 rotate-45 opacity-20 review_star02' />
+                        <p className="text-xl text-center font-heading">Perfect Gift for Fans</p>
+                        <p className='mt-6'>I purchased this as a gift for my friend, and they absolutely loved it! The attention to detail and craftsmanship are remarkable. It's a must-have for any fan of the franchise. The recipient couldn't be happier!</p>
+                    </div>
+                    <div className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
+                        <img src="https://i.ibb.co/k53XKk7/star.png" className='h-40 w-40 -z-10 absolute -right-12 top-2 rotate-45 opacity-20 review_star01' />
+                        <img src="https://i.ibb.co/k53XKk7/star.png" className='h-20 w-20 -z-10 absolute -left-8 bottom-2 rotate-45 opacity-20 review_star02' />
+                        <p className="text-xl text-center font-heading">Great Playtime Fun</p>
+                        <p className='mt-6'>This product has provided hours of enjoyment for my kids. The durability is impressive, and it can withstand rough play. The interactive features and vibrant colors make it engaging and captivating. A fantastic toy that keeps the kids entertained!</p>
+                    </div>
                 </div>
             </Section>
         </div>

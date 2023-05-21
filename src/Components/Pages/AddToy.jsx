@@ -45,9 +45,13 @@ const AddToy = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    Swal.fire(
-                        'Congratulations!','Product Added Successfully!'
-                    )
+                    Swal.fire({
+                        title:'Congratulations!',
+                        html:'Product Added Successfully!',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3500
+                    })
                 }
             })
     }
@@ -67,7 +71,7 @@ const AddToy = () => {
                     </label>
                     <label className='flex flex-col gap-2'>
                         Category:
-                        <select className='border border-gray-400 px-2 py-1 rounded'>
+                        <select name="sub_category" className='border border-gray-400 px-2 py-1 rounded'>
                             <option value="Transformers">Transformers</option>
                             <option value="Marvel">Marvel</option>
                             <option value="LEGO">LEGO</option>

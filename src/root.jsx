@@ -44,6 +44,14 @@ const router = createBrowserRouter([
                 element: <PrivateRoute><AddToy></AddToy></PrivateRoute>
             },
             {
+                path: "/toy/:id",
+                element: <PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>
+            },
+            {
+                path: "/updatetoy/:id",
+                element: <PrivateRoute><UpdateToy></UpdateToy></PrivateRoute>
+            },
+            {
                 path: "/blogz",
                 element: <Blog></Blog>
             },
@@ -62,14 +70,6 @@ const router = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact></Contact>
-            },
-            {
-                path: "/toy/:id",
-                element: <SingleProduct></SingleProduct>
-            },
-            {
-                path: "/updatetoy/:id",
-                element: <UpdateToy></UpdateToy>
             }
         ]
     },

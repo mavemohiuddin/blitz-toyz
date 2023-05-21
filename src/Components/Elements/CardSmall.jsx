@@ -1,10 +1,36 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../Utility/AuthProvider';
 
 const CardSmall = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const {_id, name, image, sub_category, seller_name, seller_email, price, rating, quantity, description} = props.product;
+
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const openProduct = id => {
+        if (user) {
+            navigate(`/toy/${id}`, {replace:true})
+        } else {
+            setModalVisible(false);
+            Swal.fire({
+                title:`You're not logged in!`,
+                icon: 'info',
+                html:`You Must Log in to view details!`,
+                showCancelButton: true,
+                cancelButtonText: "Later",
+                confirmButtonText: "Log in"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  navigate("/login", {replace:true});
+                  scrollTo(0,0)
+                }
+            })
+        }
+    }
 
     return (
         <div className={`px-6 py-4 rounded shadow-md bg-white border ${modalVisible? "border-black":""} hover:border-black transition cursor-pointer text-left`} onClick={()=>setModalVisible(true)}>
@@ -21,8 +47,8 @@ const CardSmall = (props) => {
                             </div>
                             <p>Categiry: <span className='font-bold font-heading tracking-wide'>{sub_category}</span></p>
                             <p>Seller: <span className='font-bold font-heading tracking-wide'>{seller_name}</span></p>
-                            <p className='h-12 md:h-20 overflow-hidden py-1 text-ellipsis ellipsis'>{description}</p>
-                            <Link to={`/toy/${_id}`} className="px-4 py-2 bg-primary hover:bg-h-primary transition text-white rounded mt-4 block max-w-max">View Details</Link>
+                            <p className='h-14 md:h-20 overflow-hidden py-1 text-ellipsis ellipsis'>{description}</p>
+                            <button onClick={()=>openProduct(_id)} className="px-4 py-2 bg-primary hover:bg-h-primary transition text-white rounded mt-4 block max-w-max">View Details</button>
                         </div>
                     </div>
                 </div>

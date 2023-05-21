@@ -8,8 +8,50 @@
     -webkit-box-orient: vertical;
 }
 
+.horizontal_scrollbar::-webkit-scrollbar {
+    height: 8px;
+    border-radius: 50px;
+}
+.horizontal_scrollbar::-webkit-scrollbar-track {
+    background-color: rgb(228, 228, 228);
+    border-radius: 50px;
+}
+.horizontal_scrollbar::-webkit-scrollbar-thumb {
+    background-color: #ccd6e0;
+    border-radius: 50px;
+}
+.horizontal_scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #93c5fd;
+}
+.grow_parent:hover img {
+    transform: translateY(-50px) scale(1.07);
+}
+.grow_parent img {
+    animation: bob infinite 5s both;
+}
+.review_star01 {
+    animation: pulse infinite 360s linear;
+}
+.review_star02 {
+    animation: pulse2 infinite 360s linear;
+}
 @media screen and (max-width:767px) {
     .ellipsis {
         -webkit-line-clamp: 2;
     }
+}
+@keyframes bob {
+    0% {transform: translateY(0px) scale(1);}
+    50% {transform: translateY(-50px) scale(1.07);}
+    100% {transform: translateY(0px) scale(1);}
+}
+@keyframes pulse {
+    0% {transform: translateX(0px) scale(1);}
+    50% {transform: translateX(10px) scale(1.01);}
+    100% {transform: translateX(0px) scale(1);}
+}
+@keyframes pulse2 {
+    0% {transform: translateX(0px) scale(1) rotate(0deg);}
+    50% {transform: translateX(10px) scale(1.01) rotate(180deg);}
+    100% {transform: translateX(0px) scale(1) rotate(360deg);}
 }
