@@ -8,12 +8,33 @@ import setTitle from '../Utility/Common';
 
 const Home = () => {
     const [allProduct, setAllProduct] = useState([]);
+    const [tagList, setTagList] = useState([]);
+    const [tabActive, setTabActive] = useState(0)
 
     useEffect(()=>{
         fetch("https://blitz-toyz-server-mavemohiuddin.vercel.app/toys")
         .then(res=>res.json())
         .then(data=>setAllProduct(data))
     }, [])
+
+    useEffect(()=>{
+        let newArray = []
+        allProduct.map(item=>{
+            if (!newArray.includes(item.sub_category)) {
+                newArray.push(item.sub_category)
+            }
+        })
+        setTagList(newArray);
+    }, [allProduct])
+
+    useEffect(()=>{
+        const allHeaders = document.querySelectorAll("[data-tab-heading]");
+        const allContents = document.querySelectorAll("[data-tab-content]");
+        allHeaders.length > 0 ? allHeaders.forEach(header=>header.classList.remove("bg-blue-300")) : null;
+        allHeaders.length > 0 ? allHeaders[tabActive].classList.add("bg-blue-300") : null;
+        allContents.length > 0 ? allContents.forEach(item=>item.classList.add("hidden")) : null;
+        allContents.length > 0 ? allContents[tabActive].classList.remove("hidden") : null;
+    },[tabActive])
 
     setTitle("Blitz Toyz");
     return (
@@ -50,15 +71,41 @@ const Home = () => {
                 </div>
             </Section>
 
+            <Section preHeading="Gallery" heading="Fan Favorite" extraClass="bg-orange-100 bg-opacity-50">
+                <div className='flex gap-12 overflow-auto pb-6'>
+                    {
+                        allProduct.map(product=>{
+                            if (product.id <= 12) {
+                                return <img key={product._id} src={product.image} className="h-60 w-60 object-contain shadow-lg border px-4 py-2 bg-white" />
+                            }
+                        })
+                    }
+                </div>
+            </Section>
+
             <Section
-            preHeading="Gallery"
+            preHeading="Blitz Toyz"
             heading="Explore Our collection"
             extraClass="bg-blue-100 bg-opacity-50"
             >
-                <div className='grid rid-cols-1 md:grid-cols-3 gap-8 mt-8'>
+                <div className='flex items-center justify-center gap-2 mt-8'>
                     {
-                        allProduct.map(product=>{
-                            return <CardSmall key={product._id} product={product}></CardSmall>
+                        tagList.map(tag=>{
+                            return <button key={tagList.indexOf(tag)} data-tab-heading onClick={()=>setTabActive(tagList.indexOf(tag))} className={`px-4 py-2 bg-blue-100 transition hover:bg-blue-200 ${tagList.indexOf(tag)==0?"bg-blue-300":null} whitespace-nowrap`}>{tag}</button>
+                        })
+                    }
+                </div>
+                <div className='mt-4'>
+                    {
+                        tagList.map(tag=>{
+                            // return <div key={tagList.indexOf(tag)} data-tab-content className="text-center hidden">{tag}</div>
+                            return <div key={tagList.indexOf(tag)} data-tab-content className={`text-center grid grid-cols-1 md:grid-cols-3 gap-4 ${tagList.indexOf(tag)==0?"":"hidden"}`}>
+                                {allProduct.map(product=>{
+                                    if (product.sub_category == tag) {
+                                        return <CardSmall key={product._id} product={product}></CardSmall>
+                                    }
+                                })}
+                            </div>
                         })
                     }
                 </div>

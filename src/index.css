@@ -7,3 +7,9 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
+@media screen and (max-width:767px) {
+    .ellipsis {
+        -webkit-line-clamp: 2;
+    }
+}
