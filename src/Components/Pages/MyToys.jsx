@@ -10,6 +10,7 @@ import setTitle from '../Utility/Common';
 const MyToys = () => {
     const { user } = useContext(AuthContext);
     const [allProduct, setAllProduct] = useState([]);
+    const [sortOrder, setSortOrder] = useState("asc");
 
     useEffect(() => {
         fetch("https://blitz-toyz-server-mavemohiuddin.vercel.app/toys")
@@ -18,6 +19,17 @@ const MyToys = () => {
     }, [])
 
     const filteredProduct = allProduct.filter(product => product.useremail == user.email);
+
+    const sortProduct = e => {
+        setSortOrder(e.target.value);
+        filteredProduct.sort((a, b) => {
+            if (sortOrder == "asc") {
+                return a.price - b.price;
+            } else {
+                return b.price - a.price;
+            }
+        });
+    }
 
     const deleteProduct = (id) => {
         Swal.fire({
@@ -54,19 +66,25 @@ const MyToys = () => {
 
     setTitle("Blitz | My Toyz");
     return (
-        <Section>
-            <div className='grid grid-cols-12 border-t border-l'>
+        <Section preHeading="Blitz Toyz" heading="My Toyz">
+            <div className='mt-6 flex items-center justify-evenly'>
+                <div className='max-w-max flex gap-6 items-center'>
+                    <p>Sort By - </p>
+                    <select onChange={(e)=>sortProduct(e)} name="orderPrice" className='border border-ray-400 px-4 py-2'>
+                        <option value="asc">Ascending</option>
+                        <option value="des">Descending</option>
+                    </select>
+                </div>
+            </div>
+            <div className='grid grid-cols-12 border-t border-l mt-6'>
                 <div className='p-4 border-b border-r col-span-3 text-center font-semibold py-2'>
                     <p>Product</p>
                 </div>
                 <div className='p-4 border-b border-r col-span-2 text-center font-semibold py-2'>
                     <p>Details</p>
                 </div>
-                <div className='p-4 border-b border-r col-span-4 text-center font-semibold py-2'>
+                <div className='p-4 border-b border-r col-span-5 text-center font-semibold py-2'>
                     <p>Description</p>
-                </div>
-                <div className='p-4 border-b border-r text-center font-semibold py-2'>
-                    <p>Seller</p>
                 </div>
                 <div className='p-4 border-b border-r col-span-2 text-center font-semibold py-2'>
                     <p>Action</p>
@@ -87,13 +105,8 @@ const MyToys = () => {
                                 <p>Price: ${product.price}</p>
                                 <p>Available: {product.quantity}</p>
                             </div>
-                            <div className='p-4 border-b border-r col-span-4 text-center py-2'>
+                            <div className='p-4 border-b border-r col-span-5 text-center py-2'>
                                 <p>{product.description}</p>
-                            </div>
-                            <div className='p-4 border-b border-r text-center py-2'>
-                                <p>{product.seller_name}</p>
-                                <p>{product.seller_email ? <a href={`mailto:${product.seller_email}`} /> : null}</p>
-                                {!product.seller_name ? !product.seller_email ? <p>Not Available</p> : null : null}
                             </div>
                             <div className='p-4 border-b border-r col-span-2 text-center py-2'>
                                 <div className='flex items-center gap-2 justify-center'>

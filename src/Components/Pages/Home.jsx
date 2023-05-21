@@ -8,6 +8,8 @@ import CardSmall from '../Elements/CardSmall';
 import Section from '../Elements/Section';
 import { AuthContext } from '../Utility/AuthProvider';
 import setTitle from '../Utility/Common';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Home = () => {
     const [allProduct, setAllProduct] = useState([]);
@@ -20,6 +22,10 @@ const Home = () => {
         .then(res=>res.json())
         .then(data=>setAllProduct(data))
     }, [])
+    useEffect(() => {
+        AOS.init();
+        AOS.refresh();
+    }, []);
 
     useEffect(()=>{
         setSpecialProduct(allProduct[3])
@@ -130,7 +136,7 @@ const Home = () => {
             </Section>
 
             <Section preHeading="Gallery" heading="Fan Favorite" extraClass="bg-orange-100 bg-opacity-50">
-                <div className='flex gap-12 overflow-auto pb-6 horizontal_scrollbar'>
+                <div data-aos="fade-up" className='flex gap-12 overflow-auto pb-6 horizontal_scrollbar'>
                     {
                         allProduct.map(product=>{
                             if (product.id <= 12) {
@@ -171,19 +177,19 @@ const Home = () => {
 
             <Section preHeading="Reviews" heading="Customer Reviews" extraClass="bg-purple-100">
                 <div className='grid grid-cols-1 md:grid-cols-3 gap-12 mt-12'>
-                    <div className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
+                    <div data-aos="fade-up" className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
                         <img src="https://i.ibb.co/k53XKk7/star.png" className='h-40 w-40 -z-10 absolute -right-12 top-2 rotate-45 opacity-10 review_star01' />
                         <img src="https://i.ibb.co/k53XKk7/star.png" className='h-20 w-20 -z-10 absolute -left-8 bottom-2 rotate-45 opacity-10 review_star02' />
                         <p className="text-xl text-center font-heading">Excellent Quality and Design</p>
                         <p className='mt-6'>I am extremely satisfied with this product. The quality is exceptional, and the design is impressive. It exceeded my expectations and provided great value for the price. Highly recommended!</p>
                     </div>
-                    <div className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
+                    <div data-aos="fade-up" className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
                         <img src="https://i.ibb.co/k53XKk7/star.png" className='h-40 w-40 -z-10 absolute -right-12 top-2 rotate-45 opacity-10 review_star01' />
                         <img src="https://i.ibb.co/k53XKk7/star.png" className='h-20 w-20 -z-10 absolute -left-8 bottom-2 rotate-45 opacity-10 review_star02' />
                         <p className="text-xl text-center font-heading">Perfect Gift for Fans</p>
                         <p className='mt-6'>I purchased this as a gift for my friend, and they absolutely loved it! The attention to detail and craftsmanship are remarkable. It's a must-have for any fan of the franchise. The recipient couldn't be happier!</p>
                     </div>
-                    <div className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
+                    <div data-aos="fade-up" className='bg-white rounded px-6 py-8 relative isolate overflow-hidden'>
                         <img src="https://i.ibb.co/k53XKk7/star.png" className='h-40 w-40 -z-10 absolute -right-12 top-2 rotate-45 opacity-10 review_star01' />
                         <img src="https://i.ibb.co/k53XKk7/star.png" className='h-20 w-20 -z-10 absolute -left-8 bottom-2 rotate-45 opacity-10 review_star02' />
                         <p className="text-xl text-center font-heading">Great Playtime Fun</p>
