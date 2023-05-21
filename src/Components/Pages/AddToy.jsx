@@ -26,8 +26,8 @@ const AddToy = () => {
         const newProduct = {
             name,
             image,
-            username,
-            useremail,
+            seller_name: username,
+            seller_email: useremail,
             sub_category,
             price,
             rating,
@@ -56,7 +56,6 @@ const AddToy = () => {
             })
     }
     setTitle("Blitz | Add Toyz");
-    console.log(user.displayName)
     return (
         <div>
             <Section preHeading="Blitz Toyz" heading="Add a Toy">

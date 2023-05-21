@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             {
                 path: "/alltoyz",
                 element: <AllToys></AllToys>,
-                loader: ()=>fetch("https://blitz-toyz-server-mavemohiuddin.vercel.app/toys")
+                // loader: ()=>fetch("https://blitz-toyz-server-mavemohiuddin.vercel.app/all-toys")
             },
             {
                 path: "/mytoyz",
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
                 element: <PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>
             },
             {
-                path: "/updatetoy/:id",
+                path: "/update-toy/:id",
                 element: <PrivateRoute><UpdateToy></UpdateToy></PrivateRoute>
             },
             {
