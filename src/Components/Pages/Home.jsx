@@ -32,7 +32,7 @@ const Home = () => {
                 </Banner>
             </Section>
 
-            <Section extraClass="pt-0 pb-0">
+            <Section extraClass="pt-0 pb-6">
                 <div className='grid grid-cols-3 relative'>
                     <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-3/4 border-l border-r border-gray-400'></div>
                     <div>
@@ -53,8 +53,9 @@ const Home = () => {
             <Section
             preHeading="Gallery"
             heading="Explore Our collection"
+            extraClass="bg-blue-100 bg-opacity-50"
             >
-                <div className='grid grid-cols-3 gap-8'>
+                <div className='grid rid-cols-1 md:grid-cols-3 gap-8 mt-8'>
                     {
                         allProduct.map(product=>{
                             return <CardSmall key={product._id} product={product}></CardSmall>

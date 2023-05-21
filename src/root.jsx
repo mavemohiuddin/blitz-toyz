@@ -19,6 +19,7 @@ import PrivateRoute from './Components/Utility/PrivateRoute';
 import About from './Components/Pages/About';
 import Contact from './Components/Pages/Contact';
 import SingleProduct from './Components/Pages/SingleProduct';
+import UpdateToy from './Components/Pages/UpdateToy';
 
 const router = createBrowserRouter([
     {
@@ -31,7 +32,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/alltoyz",
-                element: <AllToys></AllToys>
+                element: <AllToys></AllToys>,
+                loader: ()=>fetch("https://blitz-toyz-server-mavemohiuddin.vercel.app/toys")
             },
             {
                 path: "/mytoyz",
@@ -64,6 +66,10 @@ const router = createBrowserRouter([
             {
                 path: "/toy/:id",
                 element: <SingleProduct></SingleProduct>
+            },
+            {
+                path: "/updatetoy/:id",
+                element: <UpdateToy></UpdateToy>
             }
         ]
     },

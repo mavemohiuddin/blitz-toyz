@@ -23,7 +23,7 @@ const Header = () => {
 
     return (
         <div className='h-20 px-4 py-2 border-b shadow-mg bg-white sticky top-0 z-50'>
-            <div className='max-w-[1170px] w-full h-full mx-auto flex items-center justify-between relative'>
+            <div className='max-w-[1170px] w-full h-full mx-auto flex items-center justify-between relative '>
                 <Link to="/" className='md:translate-y-4'>
                     <img src='./logo.png' className='w-32 md:w-52' />
                 </Link>
